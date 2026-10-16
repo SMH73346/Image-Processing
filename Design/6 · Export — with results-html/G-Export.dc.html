@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Export — current app redesign</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./studio.css">
+<link rel="stylesheet" href="./gr.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app t-dark g">
+<dc-import name="GHead" tab="export" hint-size="100%,110px"></dc-import>
+<div class="col" style="gap: 16px">
+  <section class="gcard col" style="gap: 8px">
+    <p class="muted" style="font-size: 14px"><b style="color: var(--text); font-size: 15px">6</b> finished image(s) · total <b style="color: var(--text); font-size: 15px">697 KB</b> (originals 5.3 MB, <span class="ok-t b">88% smaller</span>)</p>
+    <div class="row" style="gap: 8px; font-size: 13px"><span class="muted">Output folder:</span><span class="gcode">C:\Users\Muhammad\Hifi-Consultant-Shopify\_portable\ProductImageStudio\app\projects\hiend-cables\output</span></div>
+  </section>
+  <div style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px">
+    <button class="btn primary" style="height: 44px"><dc-import name="Icon" n="folder" s="16" hint-size="16px,16px"></dc-import>Open output folder</button>
+    <button class="btn" style="height: 44px"><dc-import name="Icon" n="compare" s="16" hint-size="16px,16px"></dc-import>Create before/after sheets</button>
+    <button class="btn" style="height: 44px"><dc-import name="Icon" n="table" s="16" hint-size="16px,16px"></dc-import>Export CSV report</button>
+    <button class="btn" style="height: 44px"><dc-import name="Icon" n="folder" s="16" hint-size="16px,16px"></dc-import>Open sheets folder</button>
+  </div>
+  <section class="gcard" style="padding: 40px 14px 14px; position: relative">
+    <span class="gimglabel"><dc-import name="Icon" n="file" s="13" hint-size="13px,13px"></dc-import>Report</span>
+    <div class="row" style="padding: 12px 14px; background: var(--panel2); border-radius: 6px"><dc-import name="Icon" n="table" s="16" hint-size="16px,16px"></dc-import><span class="mono">report.csv</span><span class="sp"></span><a href="#" style="color: var(--ai); text-decoration: none" class="row small">1.4 KB<dc-import name="Icon" n="download" s="14" hint-size="14px,14px"></dc-import></a></div>
+  </section>
+  <section class="gimgpanel" style="height: 520px">
+    <span class="gimglabel"><dc-import name="Icon" n="image" s="13" hint-size="13px,13px"></dc-import>Before/after sheets</span>
+    <div class="gimgtools"><span><dc-import name="Icon" n="external" s="14" hint-size="14px,14px"></dc-import></span></div>
+    <div style="position: absolute; left: 14px; right: 14px; top: 44px; bottom: 14px; background: #f2f2f2; border-radius: 4px; padding: 14px; display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 6px; align-content: start">
+      <sc-for list="{{pairs}}" as="m" hint-placeholder-count="12"><div class="img" style="aspect-ratio: 1/1"><dc-import name="Product" kind="{{m.k}}" bg="{{m.bg}}" scale="80" hint-size="100%,100%"></dc-import></div></sc-for>
+    </div>
+  </section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const ks = ['box', 'rca', 'speaker', 'box', 'speaker', 'box'];
+    const pairs = [];
+    ks.forEach((k) => { pairs.push({ k, bg: 'white' }); pairs.push({ k, bg: 'studio' }); });
+    return { pairs };
+  }
+}
+</script>
+</body>
+</html>

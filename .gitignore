@@ -1,0 +1,14 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Generated images / working data
+cutouts/
+output/
+projects/
+review/
+
+# Portable build output
+dist/
+build/

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Review — current app redesign</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./studio.css">
+<link rel="stylesheet" href="./gr.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app t-dark g">
+<dc-import name="GHead" tab="review" hint-size="100%,110px"></dc-import>
+<div class="grow2" style="grid-template-columns: minmax(0,2fr) minmax(0,3fr)">
+  <aside class="gside">
+    <div class="grc"><span class="badge">3 not reviewed</span><span class="badge warn">⚠ 0 need a fix</span><span class="badge ok">✓ 0 approved</span><span class="badge">8 not processed yet</span></div>
+    <div class="gchips"><span class="gchip"><i></i>All</span><span class="gchip on"><i></i>Not reviewed</span><span class="gchip"><i></i>Needs fix</span><span class="gchip"><i></i>Approved</span><span class="gchip"><i></i>Failed</span></div>
+    <div class="gpair"><label class="search" style="width: auto"><dc-import name="Icon" n="search" s="15" hint-size="15px,15px"></dc-import><input class="gin" style="padding-left: 34px" placeholder="Search by name…" aria-label="Search by name"></label><button class="btn sm" style="height: 36px">Approve all shown</button></div>
+    <section class="gimgpanel" style="height: 560px">
+      <div class="gimgtools"><span><dc-import name="Icon" n="external" s="14" hint-size="14px,14px"></dc-import></span></div>
+      <div class="ggal" style="grid-template-columns: repeat(4, minmax(0,1fr)); padding-top: 40px">
+        <sc-for list="{{imgs}}" as="m" hint-placeholder-count="3"><div class="{{m.cls}}"><div class="img" style="position: absolute; inset: 0"><dc-import name="Product" kind="{{m.k}}" bg="studio" scale="80" hint-size="100%,100%"></dc-import></div><span class="cap">• {{m.n}}</span></div></sc-for>
+      </div>
+    </section>
+  </aside>
+
+  <div class="col" style="gap: 14px">
+    <section class="gimgpanel" style="height: 560px">
+      <span class="gimglabel"><dc-import name="Icon" n="compare" s="13" hint-size="13px,13px"></dc-import>Before / after (drag the handle)</span>
+      <div class="gimgtools"><span><dc-import name="Icon" n="undo" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="frame" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="download" s="14" hint-size="14px,14px"></dc-import></span></div>
+      <div style="position: absolute; left: 50%; top: 53%; width: 500px; height: 500px; transform: translate(-50%,-50%)">
+        <div class="ba-layer"><dc-import name="Product" kind="box" bg="studio" scale="84" hint-size="100%,100%"></dc-import></div>
+        <div class="ba-layer" style="clip-path: inset(0 {{right}}% 0 0)"><dc-import name="Product" kind="box" bg="white" scale="70" hint-size="100%,100%"></dc-import></div>
+        <div class="ba-line" style="left: {{pos}}%"><span class="ba-knob"><dc-import name="Icon" n="compare" s="18" hint-size="18px,18px"></dc-import></span></div>
+        <input class="ba-range" type="range" min="0" max="100" value="{{pos}}" onChange="{{onPos}}" aria-label="Compare before and after">
+      </div>
+    </section>
+    <div class="col" style="gap: 4px">
+      <h3 style="font-size: 16px; font-weight: 600" class="mono">audience-ar2-2-outlet-uk</h3>
+      <p class="small"><b>Not reviewed</b><span class="muted"> · WEBP 2048×2048 · 41 KB</span></p>
+      <p class="small muted">Original: JPG 1500×1168 · 358 KB</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1.2fr 1fr; gap: 8px">
+      <button class="btn" style="height: 44px"><dc-import name="Icon" n="arrowl" s="16" hint-size="16px,16px"></dc-import>Previous</button>
+      <button class="btn" style="height: 44px; color: var(--warn)">⚠ Needs fix<span class="kbd">F</span></button>
+      <button class="btn primary" style="height: 44px">✓ Approve<span class="kbd">A</span></button>
+      <button class="btn" style="height: 44px">Next<dc-import name="Icon" n="arrowr" s="16" hint-size="16px,16px"></dc-import></button>
+    </div>
+    <label><span class="gl">Note (what needs fixing)</span><textarea class="gin area" rows="2" placeholder="e.g. reflection left under the box" aria-label="Note (what needs fixing)" style="resize: vertical"></textarea></label>
+    <div class="row wrap" style="gap: 8px">
+      <button class="btn" style="height: 40px">↻ Redo with current settings<span class="kbd">R</span></button>
+      <button class="btn" style="height: 40px">✎ Touch up<span class="kbd">T</span></button>
+      <span class="gchip box" style="background: transparent; border-color: transparent"><i></i>Also redo the AI cut-out (about 30 s)</span>
+    </div>
+    <p class="ghint">Shortcuts: <span class="kbd">A</span> approve · <span class="kbd">F</span> needs fix · <span class="kbd">R</span> redo · <span class="kbd">T</span> touch up · <span class="kbd">←</span> <span class="kbd">→</span> previous / next. Approving or flagging moves on to the next image.</p>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(p) { super(p); this.state = { pos: 50 }; }
+  renderVals() {
+    return {
+      pos: this.state.pos, right: 100 - this.state.pos, onPos: (e) => this.setState({ pos: Number(e.target.value) }),
+      imgs: [['audience-ar2-2-outlet-uk', 'box', 1], ['audience-au24-sx-aes-ebu-digital-cable', 'rca'], ['audience-au24-sx-speaker-cable', 'speaker']].map(([n, k, s]) => ({ n, k, cls: s ? 'gth sel' : 'gth' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

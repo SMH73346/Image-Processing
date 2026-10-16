@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Run — current app redesign</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./studio.css">
+<link rel="stylesheet" href="./gr.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app t-dark g">
+<dc-import name="GHead" tab="run" hint-size="100%,110px"></dc-import>
+<div class="grow2" style="grid-template-columns: minmax(0,2fr) minmax(0,3fr)">
+  <aside class="gside" style="gap: 16px">
+    <div><span class="gl">What to process</span><div class="gchips"><span class="gchip on"><i></i>All images</span><span class="gchip"><i></i>Only images not done yet</span><span class="gchip"><i></i>Selected images</span></div></div>
+    <span class="gchip box" style="align-self: flex-start; background: transparent; border-color: transparent; padding: 0"><i></i>Redo AI cut-outs even if already saved</span>
+    <div class="col" style="gap: 10px; padding: 14px; background: var(--panel2); border-radius: 6px; font-size: 13px">
+      <p><b>11</b> image(s) to process · <b>10</b> need the AI cut-out · estimated time <b>5:02</b></p>
+      <p class="muted">Steps: Remove background, Clean up, New background, Resize / frame, Convert / compress · grey · 2048px square · WEBP q85</p>
+      <div><span class="muted">Output folder:</span><div class="gcode" style="display: block; margin-top: 4px">C:\Users\Muhammad\Hifi-Consultant-Shopify\_portable\ProductImageStudio\app\projects\hiend-cables\output</div></div>
+    </div>
+    <div class="row" style="gap: 8px">
+      <button class="btn primary lg grow" disabled="{{yes}}"><dc-import name="Icon" n="play" s="16" hint-size="16px,16px"></dc-import>Start</button>
+      <button class="btn lg grow gstop"><dc-import name="Icon" n="stop" s="15" hint-size="15px,15px"></dc-import>Cancel</button>
+    </div>
+    <button class="btn full"><dc-import name="Icon" n="folder" s="15" hint-size="15px,15px"></dc-import>Open output folder</button>
+  </aside>
+
+  <div class="col" style="gap: 16px">
+    <section class="gcard col" style="gap: 10px">
+      <div class="prog lg" role="progressbar" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100" aria-label="Run progress" style="height: 12px"><i style="width: 9%"></i></div>
+      <p style="font-size: 15px"><b style="font-size: 20px; font-weight: 600">1 of 11</b> (9%) · elapsed 4:14 · about 42:28 left</p>
+      <p class="row mono small faint" style="gap: 8px"><span class="spin" style="width: 12px; height: 12px"></span>Working on audience-au24-sx-aes-ebu-digital-cable.jpg…</p>
+    </section>
+    <div style="display: grid; grid-template-columns: minmax(0,2fr) minmax(0,3fr); gap: 16px">
+      <section class="gimgpanel" style="height: 420px">
+        <span class="gimglabel"><dc-import name="Icon" n="image" s="13" hint-size="13px,13px"></dc-import>Last finished image</span>
+        <div class="gimgtools"><span><dc-import name="Icon" n="frame" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="download" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="external" s="14" hint-size="14px,14px"></dc-import></span></div>
+        <div style="position: absolute; left: 50%; top: 54%; width: 340px; height: 340px; transform: translate(-50%,-50%)"><dc-import name="Product" kind="box" bg="studio" scale="84" hint-size="100%,100%"></dc-import></div>
+      </section>
+      <section class="col" style="gap: 6px">
+        <span class="gl" style="margin: 0">Log</span>
+        <div class="glog" style="height: 396px"><div><span class="ok-t">✓</span> audience-ar2-2-outlet-uk.jpg → audience-ar2-2-outlet-uk.webp (41 KB, 146s, AI)</div></div>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic { renderVals() { return { yes: true }; } }
+</script>
+</body>
+</html>

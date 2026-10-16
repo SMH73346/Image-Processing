@@ -1,0 +1,250 @@
+/* Product Image Studio: Darkroom look (Design/*: studio.css .t-dark + gr.css).
+   The colour variables (--bg, --panel, …), @font-face rules and the .i-<icon> rules are written in
+   front of this file by ui/assets.py. Order: base · shell · Gradio components · HTML pieces · pages. */
+
+/* ================================================================ base */
+body, .gradio-container { background: var(--bg) !important; color: var(--text); }
+.gradio-container { max-width: none !important; padding: 0 32px 32px !important; font-size: 13px;
+  line-height: 1.45; -webkit-font-smoothing: antialiased; }
+.gradio-container .main, .gradio-container .wrap.contain { max-width: none !important; }
+.gradio-container .contain { padding: 0 !important; }
+.gradio-container p { margin: 0; }
+footer { display: none !important; }
+.muted { color: var(--muted); } .faint { color: var(--faint); } .mono { font-family: var(--mono); }
+.small { font-size: 12px; } .hl { color: var(--text); font-weight: 600; }
+.ok-t { color: var(--ok); } .warn-t { color: var(--warn); } .err-t { color: var(--err); }
+.ico { fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;
+  flex: none; display: block; }
+:focus-visible { outline: 2px solid var(--focus) !important; outline-offset: 2px; }
+
+/* ================================================================ shell: header + tabs */
+.ghdr { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.ghdr .ttl { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+.ghdr .sp { flex: 1; }
+.logo { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center;
+  background: var(--accent); color: var(--on-accent); flex: none; }
+.ghdr .proj { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600;
+  padding: 4px 10px; border: 1px solid var(--line); background: var(--panel); border-radius: 6px; }
+.ghdr .proj small { font-size: 10px; letter-spacing: .08em; color: var(--faint); font-weight: 600; }
+.ghdr .proj.muted { color: var(--faint); font-weight: 500; }
+
+.tab-wrapper { border-bottom: 1px solid var(--line) !important; margin-bottom: 18px; padding: 0 !important;
+  background: transparent !important; height: auto !important; }
+.tab-container[role=tablist] { gap: 2px !important; height: auto !important; }
+.tab-container[role=tablist]::after { display: none !important; }
+.tab-wrapper button[role=tab] { font-size: 13px !important; font-weight: 500 !important; color: var(--muted) !important;
+  padding: 12px 14px !important; height: auto !important; border: 0 !important; background: transparent !important;
+  border-bottom: 2px solid transparent !important; margin-bottom: -1px; border-radius: 0 !important;
+  display: flex; gap: 6px; align-items: center; }
+.tab-wrapper button[role=tab]:hover { color: var(--text) !important; }
+.tab-wrapper button[role=tab].selected { color: var(--text) !important; border-bottom-color: var(--accent) !important; }
+.tab-wrapper button[role=tab].selected::after { display: none !important; }
+.tab-wrapper button .n { font-family: var(--mono); font-size: 11px; color: var(--faint); }
+.tab-wrapper button.selected .n { color: var(--accent); }
+.tabitem { padding: 0 !important; border: 0 !important; background: transparent !important; }
+.tabs { gap: 0 !important; }
+
+/* ================================================================ Gradio components (shared) */
+/* Gradio groups neighbouring fields in a .form drawn with the line colour behind; just stack them */
+.gradio-container .form { background: transparent !important; border: 0 !important; gap: 14px !important;
+  box-shadow: none !important; overflow: visible !important; }
+.gradio-container .block { overflow: visible !important; }
+
+/* field titles: small uppercase labels */
+.gradio-container [data-testid="block-info"] { font-size: 11px !important; font-weight: 600 !important;
+  letter-spacing: .07em; text-transform: uppercase; color: var(--muted) !important; margin-bottom: 6px !important; }
+.gradio-container [data-testid="block-info"].hide, .gradio-container .sr-only { display: none; }
+.gradio-container .info-text, .gradio-container [data-testid="block-info"] + div > .info-text {
+  font-size: 12px; color: var(--faint); margin: -2px 0 8px !important; }
+
+/* inputs */
+.gradio-container input[type=text], .gradio-container input[type=number], .gradio-container textarea,
+.gradio-container .wrap-inner { min-height: 36px; }
+.gradio-container .wrap-inner { padding: 0 8px 0 12px !important; }
+.gradio-container textarea { font-family: var(--font); }
+.mono-input textarea, .mono-input input { font-family: var(--mono) !important; font-size: 12px !important; }
+
+/* radio + checkbox groups as chips */
+.gradio-container fieldset .wrap { gap: 6px !important; }
+.gradio-container fieldset .wrap > label { border-radius: 6px !important; min-height: 34px; cursor: pointer; }
+.gradio-container fieldset .wrap > label > span { margin-left: 6px !important; }
+.gradio-container input[type=radio] { border-radius: 50% !important; }
+.gradio-container input[type=radio]:checked { background-color: transparent !important;
+  background-image: radial-gradient(circle, var(--accent) 42%, transparent 48%) !important; }
+
+/* single checkbox: chip (bordered) or plain */
+.chip label { display: inline-flex !important; align-items: center; gap: 8px; min-height: 32px; width: auto !important;
+  padding: 0 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel2); cursor: pointer; }
+.chip label:has(input:checked) { border-color: var(--accent); background: var(--panel3); }
+.chip.plain label { border-color: transparent !important; background: transparent !important; padding: 0; }
+.chip label span { font-size: 13px; color: var(--text); }
+
+/* sliders: title + number box with ↺, then min · track · max */
+.gradio-container .slider_input_container { gap: 10px; font-family: var(--mono); font-size: 11px; color: var(--faint); }
+.gradio-container .slider_input_container .min_value, .gradio-container .slider_input_container .max_value {
+  font-family: var(--mono); font-size: 11px; color: var(--faint); }
+.gradio-container input[type=range] { height: 6px; border-radius: 999px; }
+.gradio-container input[type=range]::-webkit-slider-thumb { width: 16px; height: 16px; border-radius: 50%;
+  background: #fff; border: 0; box-shadow: 0 1px 3px rgba(0,0,0,.5); }
+.gradio-container .tab-like-container { border: 1px solid var(--line); border-radius: 6px; background: var(--panel2);
+  height: 28px; overflow: hidden; }
+.gradio-container .tab-like-container input[type=number] { font-family: var(--mono); font-size: 12px; min-height: 0;
+  height: 26px; width: 56px; text-align: center; border: 0 !important; background: transparent !important; }
+.gradio-container .tab-like-container .reset-button { border-left: 1px solid var(--line); width: 28px; height: 26px;
+  color: var(--muted); }
+
+/* accordions: uppercase header with a rule */
+.gradio-container .gr-accordion { padding: 0 !important; overflow: visible !important; }
+.gradio-container .gr-accordion > .label-wrap span { font-size: 11px !important; font-weight: 600; }
+.gradio-container .gr-accordion > .label-wrap .icon { color: var(--muted); font-size: 9px !important; }
+.gradio-container .gr-accordion > .label-wrap { padding: 4px 0 10px !important; margin-bottom: 14px;
+  border-bottom: 1px solid var(--line); font-size: 11px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text); }
+
+/* buttons */
+.gradio-container button.lg, .gradio-container button.md { min-height: 36px; }
+.gradio-container button.sm { min-height: 28px; }
+.gradio-container button.tall, .actions.tall button { min-height: 44px; }
+.gradio-container button.full { width: 100%; }
+.gradio-container button.t-warn { color: var(--warn) !important; }
+.gradio-container button.primary:disabled, .gradio-container button:disabled { opacity: .45; cursor: not-allowed; }
+.ico-btn { gap: 8px !important; }
+.ico-btn::before { content: ""; width: 16px; height: 16px; flex: none; background: currentColor;
+  -webkit-mask-position: center; mask-position: center; -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; }
+button.sm.ico-btn::before { width: 14px; height: 14px; }
+.ico-btn.ico-end { flex-direction: row-reverse; }
+/* shortcut key caps after a button label: .k-a … */
+[class*=" k-"]::after { display: inline-flex; align-items: center; justify-content: center; min-width: 20px;
+  height: 20px; padding: 0 5px; margin-left: 8px; font-family: var(--mono); font-size: 11px; font-weight: 500;
+  line-height: 1; border: 1px solid currentColor; border-bottom-width: 2px; border-radius: 4px; opacity: .7; }
+.k-a::after { content: "A"; } .k-f::after { content: "F"; } .k-r::after { content: "R"; } .k-t::after { content: "T"; }
+
+/* rows of equal buttons, and field + button pairs */
+.actions { gap: 8px !important; flex-wrap: nowrap !important; }
+.actions > * { flex: 1 1 0 !important; min-width: 0 !important; }
+.gpair { gap: 8px !important; align-items: flex-end !important; flex-wrap: nowrap !important; }
+.gpair > button { flex: 0 0 auto !important; min-width: 120px !important; min-height: 36px; }
+
+/* columns */
+.w-280 { flex: 0 0 280px !important; } .w-300 { flex: 0 0 300px !important; } .w-340 { flex: 0 0 340px !important; }
+.gside { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px !important;
+  gap: 14px !important; align-self: flex-start; }
+.gradio-container .row { gap: 16px; }
+
+/* image panels: dark stage, corner tag, toolbar */
+.well { background: var(--stage) !important; border: 1px solid var(--line) !important; border-radius: 8px !important;
+  overflow: hidden; position: relative; }
+.well > label[data-testid="block-label"], .well label.float { position: absolute; top: 0; left: 0; z-index: 5;
+  text-transform: uppercase; letter-spacing: .06em; border-top: 0 !important; border-left: 0 !important; }
+.well .icon-button-wrapper { background: var(--tag-bg) !important; border: 1px solid var(--line) !important;
+  border-radius: 6px !important; padding: 2px !important; top: 6px !important; right: 6px !important; }
+.well .icon-button-wrapper button { color: var(--muted) !important; background: transparent !important; }
+.well .grid-wrap { padding: 42px 12px 12px !important; }
+.well .grid-container { gap: 8px !important; }
+.well .thumbnail-item { border: 1px solid var(--line) !important; border-radius: 4px !important;
+  background: var(--panel) !important; box-shadow: none !important; }
+.well .thumbnail-item.selected, .well .thumbnail-item:focus-visible { outline: 2px solid var(--accent) !important;
+  outline-offset: -1px; border-color: var(--accent) !important; }
+.well .caption-label { font-family: var(--mono) !important; font-size: 11px !important; color: var(--muted) !important;
+  background: rgba(16,16,18,.85) !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  max-width: none !important; border-radius: 0 !important; padding: 4px 8px !important; text-align: left; }
+.well .empty, .well .wrap.svelte-empty { color: var(--faint); }
+/* image editor (Touch-up): tool rail as in the design */
+.well .toolbar-wrap { background: var(--panel) !important; border: 1px solid var(--line) !important;
+  border-radius: 8px !important; padding: 6px !important; gap: 4px !important; left: 12px !important; }
+.well .toolbar-wrap .half-container { gap: 4px !important; }
+.well .toolbar-wrap button { width: 40px !important; height: 40px !important; border-radius: 6px !important;
+  color: var(--text) !important; }
+.well .toolbar-wrap button.highlight { background: var(--accent) !important; color: var(--on-accent) !important; }
+.well .toolbar-wrap button .medium { width: 20px; height: 20px; }
+
+/* file output (Export → Report) */
+.well.file { padding: 40px 14px 14px !important; background: var(--panel) !important; }
+.well.file table { background: var(--panel2); border-radius: 6px; }
+.well.file td { font-family: var(--mono); font-size: 12px; border: 0 !important; padding: 12px 14px !important; }
+.well.file a { color: var(--ai) !important; }
+
+/* ================================================================ HTML pieces (ui/html.py) */
+.gcard { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px;
+  display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ginset { display: flex; flex-direction: column; gap: 10px; padding: 14px; background: var(--panel2);
+  border-radius: 6px; font-size: 13px; }
+.ginset .gcode { display: block; margin-top: 4px; }
+.gh3 { font-size: 16px; font-weight: 600; margin: 0; color: var(--text); }
+.gpaths { display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+.gpaths > div { display: flex; gap: 8px; align-items: center; min-width: 0; }
+.gpaths .muted { width: 96px; flex: none; }
+.gcode { font-family: var(--mono); font-size: 12px; background: var(--panel2); border: 1px solid var(--line);
+  border-radius: 4px; padding: 1px 6px; word-break: break-all; color: var(--text); }
+.gl { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted);
+  display: block; margin-bottom: 6px; }
+.gtag { position: absolute; top: 0; left: 0; z-index: 5; display: flex; align-items: center; gap: 6px; font-size: 11px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--tag-bg);
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 6px 10px;
+  border-bottom-right-radius: 6px; }
+.gempty { display: grid; place-items: center; gap: 8px; color: var(--faint); min-height: 120px; text-align: center; }
+.note { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 6px; font-size: 13px;
+  color: var(--text); }
+.note .ic { flex: none; margin-top: 1px; }
+.note.info { background: var(--info-bg); } .note.info .ic { color: var(--ai); }
+.note.ok { background: var(--ok-bg); } .note.ok .ic { color: var(--ok); }
+.note.warn { background: var(--warn-bg); } .note.warn .ic { color: var(--warn); }
+.note.err { background: var(--err-bg); } .note.err .ic { color: var(--err); }
+.gmsg { display: flex; align-items: center; gap: 8px; font-size: 13px; padding: 8px 12px; border-radius: 6px; }
+.gmsg.ok { color: var(--ok); background: var(--ok-bg); }
+.gmsg.warn { color: var(--warn); background: var(--warn-bg); }
+.gmsg.err { color: var(--err); background: var(--err-bg); }
+.gstack { display: flex; flex-direction: column; gap: 4px; }
+.grc { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge { display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 999px;
+  font-size: 12px; font-weight: 600; background: var(--panel3); color: var(--muted); white-space: nowrap; }
+.badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.badge.ok { background: var(--ok-bg); color: var(--ok); } .badge.warn { background: var(--warn-bg); color: var(--warn); }
+.badge.err { background: var(--err-bg); color: var(--err); } .badge.info { background: var(--info-bg); color: var(--ai); }
+.pill { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px;
+  border: 1px solid var(--line); font-size: 12px; font-weight: 500; color: var(--muted); background: var(--panel);
+  white-space: nowrap; }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; display: inline-block; }
+.dot.ok { background: var(--ok); } .dot.warn { background: var(--warn); } .dot.err { background: var(--err); }
+.dot.run { background: var(--accent); }
+.kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px;
+  font-family: var(--mono); font-size: 11px; padding: 0 5px; border: 1px solid var(--line); border-bottom-width: 2px;
+  border-radius: 4px; color: var(--muted); background: var(--panel); line-height: 1; font-weight: 500; }
+.ghint { font-size: 12px; color: var(--faint); line-height: 1.6; }
+.ghint b { color: var(--muted); }
+.ghint ol { margin: 6px 0; padding-left: 18px; }
+.ghint .red { color: var(--err); } .ghint .green { color: var(--ok); }
+.gkv { display: grid; grid-template-columns: 170px minmax(0, 1fr); font-size: 13px; margin: 0; }
+.gkv dt, .gkv dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.gkv dt { color: var(--muted); font-weight: 600; }
+.gkv dd { color: var(--text); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.gkv dt:last-of-type, .gkv dd:last-of-type { border-bottom: 0; }
+.prog { height: 12px; border-radius: 999px; background: var(--panel3); overflow: hidden; width: 100%; }
+.prog > i { display: block; height: 100%; background: var(--accent); border-radius: inherit; transition: width .4s; }
+.prog.ok > i { background: var(--ok); }
+.gprog { gap: 10px; }
+.gline { font-size: 15px; } .gline b { font-size: 20px; font-weight: 600; }
+.gsub { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+@keyframes pis-spin { to { transform: rotate(360deg); } }
+.spin { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--panel3); border-top-color: var(--accent);
+  animation: pis-spin .9s linear infinite; flex: none; }
+.glogwrap { display: flex; flex-direction: column; }
+.glog { font-family: var(--mono); font-size: 12px; line-height: 1.7; background: var(--stage); border: 1px solid var(--line);
+  border-radius: 6px; padding: 10px 12px; color: var(--text); height: 396px; overflow: auto;
+  display: flex; flex-direction: column-reverse; }
+.glog > div { flex: none; white-space: pre-wrap; word-break: break-word; }
+.glog > div:first-child { margin-bottom: auto; }  /* newest line; keeps a short log at the top */
+
+.big { font-size: 14px; } .big .hl { font-size: 15px; }
+.kvcard { padding: 4px 18px; }
+.rule-top { border-top: 1px solid var(--line); padding-top: 12px; }
+.gtools { gap: 8px !important; align-items: center !important; flex-wrap: wrap !important; }
+.gtools > * { flex: 0 0 auto !important; min-width: 0 !important; }
+
+/* ================================================================ pages */
+/* Settings: colour swatch next to the shadow chip */
+.swatch input[type=color] { width: 56px; height: 32px; border-radius: 6px; border: 1px solid var(--line); padding: 0; }
+/* Review: search field with an icon */
+.search input, .search textarea { padding-left: 34px !important; background-repeat: no-repeat;
+  background-position: 10px 50%; background-size: 15px; background-image: var(--search-ico); }

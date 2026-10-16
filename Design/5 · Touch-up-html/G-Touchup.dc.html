@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Touch-up — current app redesign</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./studio.css">
+<link rel="stylesheet" href="./gr.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="app t-dark g">
+<dc-import name="GHead" tab="touchup" hint-size="100%,110px"></dc-import>
+<div class="grow2" style="grid-template-columns: 300px minmax(0,1fr) 280px">
+  <aside class="gside">
+    <span class="gchip box on" style="align-self: flex-start; background: transparent; border-color: transparent; padding: 0"><i></i>Only images marked 'Needs fix'</span>
+    <div><span class="gl">Image</span><div class="gin ph">Choose an image<dc-import name="Icon" n="down" s="16" hint-size="16px,16px"></dc-import></div></div>
+    <div class="row" style="gap: 8px"><button class="btn sm grow">← Previous</button><button class="btn sm grow">Next →</button></div>
+    <div><span class="gl">Show the cut-out</span><div class="gchips"><span class="gchip on"><i></i>On the background</span><span class="gchip"><i></i>On a checkerboard</span></div></div>
+    <p class="small">Choose an image to touch up.</p>
+    <div class="ghint" style="border-top: 1px solid var(--line); padding-top: 12px">
+      <b>How to use</b>
+      <ol>
+        <li>Pick the <b style="color: #ff8a80">red</b> brush and paint over what should go (e.g. a reflection).</li>
+        <li>Pick the <b style="color: #62d394">green</b> brush and paint over parts of the product that are missing.</li>
+        <li>Click <b>Apply</b>. The cut-out is updated and the final image is re-made (about 2 s).</li>
+      </ol>
+      Use the editor's eraser or undo to fix a stroke before applying. Zoom with the mouse wheel for small details.
+    </div>
+  </aside>
+
+  <div class="col" style="gap: 12px">
+    <section class="gimgpanel" style="height: 680px">
+      <span class="gimglabel"><dc-import name="Icon" n="brush" s="13" hint-size="13px,13px"></dc-import>Paint: red = erase · green = restore</span>
+      <div class="gimgtools"><span><dc-import name="Icon" n="hand" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="zoomout" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="zoomin" s="14" hint-size="14px,14px"></dc-import></span><span class="mono" style="width: auto; padding: 0 6px; font-size: 11px">77%</span><span><dc-import name="Icon" n="undo" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="redo" s="14" hint-size="14px,14px"></dc-import></span><span><dc-import name="Icon" n="trash" s="14" hint-size="14px,14px"></dc-import></span></div>
+      <div class="tools" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); z-index: 5">
+        <button class="tool on" aria-label="Brush"><dc-import name="Icon" n="brush" s="18" hint-size="18px,18px"></dc-import></button>
+        <button class="tool" aria-label="Eraser"><dc-import name="Icon" n="eraser" s="18" hint-size="18px,18px"></dc-import></button>
+      </div>
+      <div class="bg-checkerdark" style="position: absolute; left: 76px; right: 24px; top: 48px; bottom: 44px; display: grid; place-items: center; border-radius: 4px">
+        <div style="text-align: center" class="col"><span class="faint" style="display: grid; place-items: center"><dc-import name="Icon" n="brush" s="28" hint-size="28px,28px"></dc-import></span><span class="muted">select the draw tool to start</span></div>
+      </div>
+      <span class="pill" style="position: absolute; right: 12px; bottom: 8px; z-index: 5; height: 26px">Layer 1<dc-import name="Icon" n="layers" s="13" hint-size="13px,13px"></dc-import></span>
+    </section>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px">
+      <button class="btn primary" style="height: 44px">Apply</button>
+      <button class="btn" style="height: 44px">Undo last apply</button>
+      <button class="btn gstop" style="height: 44px">Reset to AI cut-out</button>
+      <button class="btn" style="height: 44px">✓ Approve &amp; next</button>
+    </div>
+  </div>
+
+  <aside class="col" style="gap: 10px">
+    <section class="gimgpanel" style="height: 360px">
+      <span class="gimglabel"><dc-import name="Icon" n="image" s="13" hint-size="13px,13px"></dc-import>Final image</span>
+      <div style="position: absolute; inset: 0; display: grid; place-items: center" class="faint"><dc-import name="Icon" n="image" s="30" hint-size="30px,30px"></dc-import></div>
+    </section>
+    <p class="ghint">The final image updates after each Apply, Undo or Reset.</p>
+  </aside>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic { renderVals() { return {}; } }
+</script>
+</body>
+</html>
